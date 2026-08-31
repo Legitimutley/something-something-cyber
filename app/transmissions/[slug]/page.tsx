@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTransmission, transmissions } from '@/content/transmissions';
+import ReadingProgress from './ReadingProgress';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -42,6 +43,10 @@ export default async function TransmissionPage({ params }: PageProps) {
 
   if (!transmission) notFound();
 
+  const sections = transmission.blocks
+    .filter((block): block is Extract<typeof block, { type: 'heading' }> => block.type === 'heading')
+    .map(({ id, text }) => ({ id, label: text }));
+
   return (
     <main className="transmission-reader crt-shell">
       <div className="ambient-grid transmissions-grid" aria-hidden="true" />
@@ -53,7 +58,9 @@ export default async function TransmissionPage({ params }: PageProps) {
         <span className="reader-online"><span className="status-dot" /> ARCHIVE ONLINE</span>
       </header>
 
-      <article className="reader-article">
+      <ReadingProgress sections={sections} />
+
+      <article className="reader-article" data-transmission-article>
         <header className="article-hero">
           <div className="article-signal" aria-hidden="true">
             <span />
