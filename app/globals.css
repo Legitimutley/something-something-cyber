@@ -234,6 +234,25 @@ a { color: inherit; text-decoration: none; }
 .reader-wordmark:hover, .reader-wordmark:focus-visible { text-shadow: 0 0 16px rgba(150,255,80,.6); }
 .reader-online { display: flex; align-items: center; justify-content: flex-end; gap: 10px; color: var(--muted); }
 .reader-online .status-dot { width: 8px; height: 8px; }
+.reading-progress { position: sticky; top: 0; z-index: 35; width: min(1180px, calc(100% - 48px)); margin: 0 auto; border-bottom: 1px solid rgba(90,220,80,.24); background: rgba(2,16,7,.94); box-shadow: 0 12px 30px rgba(1,10,5,.22); backdrop-filter: blur(12px); }
+.reading-progress-toggle { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; width: 100%; align-items: center; gap: 22px; padding: 11px 2px 10px; cursor: pointer; border: 0; color: inherit; text-align: left; background: none; }
+.reading-progress-status { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font: 10px 'Share Tech Mono', monospace; letter-spacing: .14em; }
+.reading-progress-label { color: #4d8a46; }
+.reading-progress-status output { color: var(--lime); }
+.reading-progress-section { overflow: hidden; color: #94c58a; font: 10px 'Share Tech Mono', monospace; letter-spacing: .14em; text-overflow: ellipsis; white-space: nowrap; }
+.reading-progress-command { color: #63995b; font: 9px 'Share Tech Mono', monospace; letter-spacing: .14em; white-space: nowrap; }
+.reading-progress-toggle:hover .reading-progress-command, .reading-progress-toggle:focus-visible .reading-progress-command { color: var(--acid); }
+.reading-progress-toggle:focus-visible { outline: 1px solid rgba(210,255,130,.75); outline-offset: 4px; }
+.reading-progress-track { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; overflow: hidden; background: rgba(90,220,80,.12); }
+.reading-progress-track span { display: block; width: 100%; height: 100%; transform-origin: left; background: linear-gradient(90deg, #61d72c, var(--acid)); box-shadow: 0 0 12px rgba(150,255,80,.8); transition: transform .1s linear; }
+.reading-progress-menu { position: absolute; top: 100%; right: 0; width: min(520px, 100%); padding: 20px; border: 1px solid rgba(120,255,80,.3); border-top: 0; background: rgba(3,20,8,.98); box-shadow: 0 22px 46px rgba(0,0,0,.42); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%); }
+.reading-progress-menu-label { display: block; margin-bottom: 12px; color: #4d8a46; font: 9px 'Share Tech Mono', monospace; letter-spacing: .18em; }
+.reading-progress-menu ol { margin: 0; padding: 0; list-style: none; }
+.reading-progress-menu li + li { border-top: 1px solid rgba(90,220,80,.12); }
+.reading-progress-menu a { display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 10px 8px; color: #89b681; font: 11px/1.4 'Share Tech Mono', monospace; letter-spacing: .08em; }
+.reading-progress-menu a span { color: #456f41; }
+.reading-progress-menu a:hover, .reading-progress-menu a:focus-visible, .reading-progress-menu a.is-active { color: var(--acid); background: rgba(120,255,70,.07); outline: none; }
+.reading-progress-menu a.is-active span { color: var(--lime); }
 .reader-article { position: relative; z-index: 2; width: min(900px, calc(100% - 48px)); margin: 0 auto; padding: 72px 0 64px; }
 .article-hero { position: relative; padding: 0 0 42px; border-bottom: 1px solid rgba(90,220,80,.28); }
 .article-signal { display: flex; align-items: flex-end; gap: 5px; height: 34px; margin-bottom: 28px; }
@@ -280,6 +299,11 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 720px) {
   .reader-header { grid-template-columns: 1fr auto; width: calc(100% - 32px); }
   .reader-wordmark { display: none; }
+  .reading-progress { width: calc(100% - 32px); }
+  .reading-progress-toggle { grid-template-columns: 74px minmax(0, 1fr); gap: 14px; }
+  .reading-progress-command { display: none; }
+  .reading-progress-section { font-size: 9px; }
+  .reading-progress-menu { width: 100%; }
   .reader-article { width: calc(100% - 32px); padding: 48px 0; }
   .article-readout { grid-template-columns: repeat(2, 1fr); }
   .article-readout div:nth-child(3) { border-top: 1px solid rgba(90,220,80,.22); border-left: 0; }
